@@ -11,10 +11,14 @@ public class PriceCatalog {
     private final Map<BigDecimal, String> prices = new HashMap<>();
 
     public PriceCatalog() {
-        prices.put(new BigDecimal("1.0"), "coffee");
+        prices.put(normalize(new BigDecimal("1.0")), "coffee");
     }
 
     public String findProduct(BigDecimal amount) {
-        return prices.get(amount);
+        return prices.get(normalize(amount));
+    }
+
+    private BigDecimal normalize(BigDecimal amount) {
+        return amount.stripTrailingZeros();
     }
 }
